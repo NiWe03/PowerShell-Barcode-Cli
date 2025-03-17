@@ -3,7 +3,8 @@
   Create Barcodes
 .DESCRIPTION
   This Function can create Barcodes, DataMatrix Codes, QR Codes and more. Its a powershell Wrapper around the zint.exe cli
-
+.NOTES
+  You have to write the Path manually to the $ZintPath Parameter, default is '.\zint.exe'
 .EXAMPLE
   New-Barcode -BarcodeType "CODE128" -Content "1234567890"
 .PARAMETER BarcodeType 
@@ -100,7 +101,7 @@ function New-Barcode {
   )
 
   if (-Not (Test-Path $ZintPath)) {
-      Write-Error "Zint wurde nicht gefunden!"
+      Write-Error "Zint not fount!"
       return
   }
 
@@ -131,8 +132,8 @@ function New-Barcode {
         Name = $FileName
         FilePath = $OutputFile
       }
-      #return $Output
+      return $Output
   } else {
-      Write-Error "Fehler: Barcode konnte nicht erstellt werden."
+      Write-Error "Could not create Barcode."
   }
 }
